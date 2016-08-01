@@ -55,7 +55,13 @@ module.exports = function (app) {
             if (err) {
                 res.status(500).send(err);
             } else {
-                res.status(200).send(result);
+                var message;
+                if (result.n > 0) {
+                    message = 'ok';
+                } else {
+                    message = 'No record to delete';
+                }
+                res.status(200).send({message: message});
             }
         });
     });

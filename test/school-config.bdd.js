@@ -1,5 +1,5 @@
 'use strict';
-var Time = require('../src/boundary/time');
+var SchoolConfig = require('../src/boundary/school-config');
 var Database = require('./config/database');
 var sinon = require('sinon');
 var chai = require('chai');
@@ -13,134 +13,86 @@ describe('School Config Service BDD', function () {
         return db.connect(done);
     });
 
-    describe('GIVEN: the person checks in', function () {
-        var personType = 'Visitor';
-        var fullname = 'Analyn Flores';
-        var purpose = 'Research';
-        var personId = '123456789';
-        var department = 'College of Science';
-        var studentLevel = '1st Year';
+    describe('GIVEN: I have school name and address', function () {
+        var schoolName = 'School of fish';
+        var schoolAddress = 'Pacific Ocean';
+        var userId = '579228f2287055b40980f8ce';
         var data = {};
-        var visitorData = {};
-        var when  = new Date().getTime();
 
         beforeEach(function () {
-            data.personType = personType;
-            data.fullname = fullname;
-            data.purpose = purpose;
-            data.personId = personId;
-            data.department = department;
-            data.studentLevel = studentLevel;
-            data.when = when;
-            visitorData.fullname = fullname;
-            visitorData.purpose = purpose;
-            visitorData.when = data.when;
+            data.name = schoolName;
+            data.address = schoolAddress;
         });
 
-        describe('WHEN: saving time-in', function () {
+        describe('WHEN: saving school profile', function () {
             var expectedResult;
             beforeEach(function (done) {
-                Time.checkIn(data, function (err, result) {
+                var createData = data;
+                createData.createdBy = userId;
+                SchoolConfig.createSchoolProfile(createData, function (err, result) {
                     expectedResult = result;
                     done();
                 });
             });
 
-            it('THEN: return is true', function () {
-                expect(!!expectedResult).to.equal(true);
+            it('THEN: schoolId is generated', function () {
+                expect(expectedResult._id).to.not.be.null;
             });
 
-            describe('WHEN: updating purpose', function () {
+            describe('WHEN: updating school profile', function () {
                 var updateResult;
-                var updateErr;
-                var newPurpose = 'sleep';
                 beforeEach(function (done) {
-                    Time.checkInPurpose(expectedResult._id, newPurpose, function (err, result) {
-                        updateErr = err;
+                    var updateData = {};
+                    updateData.address = 'South China Sea';
+                    updateData.updatedBy = userId;
+                    SchoolConfig.updateSchoolProfile(expectedResult._id, updateData, function (err, result) {
                         updateResult = result;
                         done();
                     });
                 });
 
-                it('THEN: return is true', function () {
-                    expect(updateErr).to.be.null;
+                it('THEN: updated value is equal to new value', function () {
                     expect(!!updateResult).to.equal(true);
                 });
             });
 
-            describe('WHEN: getting time info', function () {
-                var updateResult;
-                var updateErr;
+            describe('WHEN: getting school profile', function () {
+                var getResult;
+                var getErr;
                 beforeEach(function (done) {
-                    Time.getTimeInfo(expectedResult._id, function (err, result) {
-                        updateErr = err;
-                        updateResult = result;
+                    SchoolConfig.getSchoolProfile(expectedResult._id, function (err, result) {
+                        getErr = err;
+                        getResult = result;
                         done();
                     });
                 });
 
-                it('THEN: time in record is retrieved', function () {
-                    console.log(updateResult);
+                it('THEN: school profile is retrieved', function () {
+                    expect(getErr).to.be.null;
+                    expect(!!getResult).to.equal(true);
+                });
+            });
+
+            describe('WHEN: deleting school profile', function () {
+                var deleteResult;
+                var updateErr;
+                beforeEach(function (done) {
+                    SchoolConfig.deleteSchoolProfile(expectedResult._id, function (err, result) {
+                        updateErr = err;
+                        deleteResult = result;
+                        done();
+                    });
+                });
+
+                it('THEN: school profile is removed', function () {
                     expect(updateErr).to.be.null;
-                    expect(!!updateResult).to.equal(true);
+                    expect(!!deleteResult).to.equal(true);
                 });
             });
-
         });
 
-        describe('WHEN: visitor checks in', function () {
-            var expectedResult;
-            beforeEach(function (done) {
-                Time.checkInVisitor(visitorData, function (err, result) {
-                    expectedResult = result;
-                    done();
-                });
-            });
-
-            it('THEN: return is true', function () {
-                console.log(expectedResult);
-                expect(!!expectedResult).to.equal(true);
-            });
-        });
     });
-    describe('GIVEN: time-in records are retrieved', function () {
-        var dateFrom = '2016-07-22';
-        var dateTo = '2016-07-22';
-        var data = {};
 
-        beforeEach(function () {
-            data.dateFrom = dateFrom;
-            data.dateTo = dateTo;
-        });
-
-        describe('WHEN: getting time-ins', function () {
-            var expectedResult;
-            beforeEach(function (done) {
-                Time.getTimeInRecords(data, function (err, result) {
-                    expectedResult = result;
-                    done();
-                });
-            });
-
-            it('THEN: return is true', function () {
-                expect(!!expectedResult).to.equal(true);
-            });
-        });
-
-        describe('WHEN: getting today time-ins', function () {
-            var expectedResult;
-            beforeEach(function (done) {
-                Time.getTodayRecords(new Date().getTime(), function (err, result) {
-                    expectedResult = result;
-                    done();
-                });
-            });
-
-            it('THEN: return is true', function () {
-                expect(!!expectedResult).to.equal(true);
-            });
-        });
-    });
     afterEach(function (done) {
         return db.disconnect(done);
     });

@@ -12,7 +12,7 @@ module.exports = {
 			updatedBy: param.createdBy}, callback);
     },
     updateSchoolProfile: function (schoolId, updateParam, callback) {
-    	updateParam.updatedOn = Date.now;
+    	updateParam.updatedOn = new Date();
     	new UpdateSchoolProfile(schoolId, updateParam, callback);
     },
     getSchoolProfile: function (schoolId, callback) {
