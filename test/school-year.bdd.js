@@ -5,7 +5,7 @@ var sinon = require('sinon');
 var chai = require('chai');
 var expect = chai.expect;
 var CONNECT_TEST_TIMEOUT = process.env.CONNECT_TEST_TIMEOUT || 50000;
-describe('School Config Service BDD', function () {
+describe('School Year BDD', function () {
     var db = new Database();
 
     beforeEach(function (done) {
@@ -13,79 +13,79 @@ describe('School Config Service BDD', function () {
         return db.connect(done);
     });
 
-    describe('GIVEN: I have school name and address', function () {
-        var schoolName = 'School of fish';
-        var schoolAddress = 'Pacific Ocean';
-        var userId = '579228f2287055b40980f8ce';
+    describe('GIVEN: I have school year data', function () {
+        var description = 'SY 2016';
+        var dateStart = '2016-06-08';
+        var dateEnd = '2017-03-31';
+        var username = 'analyn';
         var data = {};
 
         beforeEach(function () {
-            data.name = schoolName;
-            data.address = schoolAddress;
+            data.description = description;
+            data.dateStart = dateStart;
+            data.dateEnd = dateEnd;
+            data.createdBy = username;
+            data.updatedBy = username;
         });
 
-        describe('WHEN: saving school profile', function () {
+        describe('WHEN: saving school year', function () {
             var expectedResult;
             beforeEach(function (done) {
-                var createData = data;
-                createData.createdBy = userId;
-                SchoolConfig.createSchoolProfile(createData, function (err, result) {
+                SchoolConfig.createSchoolYear(data, function (err, result) {
                     expectedResult = result;
                     done();
                 });
             });
 
-            it('THEN: schoolId is generated', function () {
+            it('THEN: schoolYearId is generated', function () {
                 expect(expectedResult._id).to.not.be.null;
             });
 
-            describe('WHEN: updating school profile', function () {
+            describe('WHEN: updating school year', function () {
                 var updateResult;
                 beforeEach(function (done) {
-                    var updateData = {};
-                    updateData.address = 'South China Sea';
-                    updateData.updatedBy = userId;
-                    SchoolConfig.updateSchoolProfile(expectedResult._id, updateData, function (err, result) {
+                    data.description = 'School Year 2016'
+                    SchoolConfig.updateSchoolYear(expectedResult._id, data, function (err, result) {
                         updateResult = result;
                         done();
                     });
                 });
 
-                it('THEN: updated value is equal to new value', function () {
+                it('THEN: school year is updated', function () {
                     expect(!!updateResult).to.equal(true);
                 });
             });
 
-            describe('WHEN: getting school profile', function () {
+            describe('WHEN: getting school year', function () {
                 var getResult;
                 var getErr;
                 beforeEach(function (done) {
-                    SchoolConfig.getSchoolProfile(expectedResult._id, function (err, result) {
+                    SchoolConfig.getSchoolYear(expectedResult._id, function (err, result) {
                         getErr = err;
                         getResult = result;
                         done();
                     });
                 });
 
-                it('THEN: school profile is retrieved', function () {
+                it('THEN: school year is retrieved', function () {
                     expect(getErr).to.be.null;
                     expect(!!getResult).to.equal(true);
                 });
             });
 
-            describe('WHEN: deleting school profile', function () {
+            describe('WHEN: deleting school year', function () {
                 var deleteResult;
-                var updateErr;
+                var deleteErr;
                 beforeEach(function (done) {
-                    SchoolConfig.deleteSchoolProfile(expectedResult._id, function (err, result) {
-                        updateErr = err;
+                    SchoolConfig.deleteSchoolYear(expectedResult._id, function (err, result) {
+                        deleteErr = err;
                         deleteResult = result;
                         done();
                     });
                 });
 
-                it('THEN: school profile is removed', function () {
-                    expect(updateErr).to.be.null;
+                it('THEN: school year is removed', function () {
+                    expect(deleteErr).to.be.null;
                     expect(!!deleteResult).to.equal(true);
                 });
             });
