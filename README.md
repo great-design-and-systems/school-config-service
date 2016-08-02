@@ -49,3 +49,19 @@ update-school-sem
 	"schoolYearId" : "School Year Id",
 	"updatedBy" : "username"
 }
+
+create-education-level
+{
+	"name" : "Education Level Name",
+	"description" : "Description",
+	"schoolId" : "School Id",
+	"createdBy" : "username"
+}
+
+update-education-level
+{
+	"name" : "Education Level Name",
+	"description" : "Description",
+	"schoolId" : "School Id",
+	"updatedBy" : "username"
+}

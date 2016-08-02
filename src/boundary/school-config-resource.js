@@ -18,7 +18,11 @@ module.exports = function (app) {
                 createSchoolSem: 'http://' + req.headers.host + API + 'create-school-sem',
                 getSchoolSem: 'http://' + req.headers.host + API + 'get-school-sem/{schoolSemId}',
                 updateSchoolSem: 'http://' + req.headers.host + API + 'update-school-sem/{schoolSemId}',
-                deleteSchoolSem: 'http://' + req.headers.host + API + 'delete-school-sem/{schoolSemId}'
+                deleteSchoolSem: 'http://' + req.headers.host + API + 'delete-school-sem/{schoolSemId}',
+                createEducationLevel: 'http://' + req.headers.host + API + 'create-education-level',
+                getEducationLevel: 'http://' + req.headers.host + API + 'get-education-level/{educationLevelId}',
+                updateEducationLevel: 'http://' + req.headers.host + API + 'update-education-level/{educationLevelId}',
+                deleteEducationLevel: 'http://' + req.headers.host + API + 'delete-education-level/{educationLevelId}'
             }
         });
     });
@@ -61,7 +65,9 @@ module.exports = function (app) {
     app.delete(API + 'delete-school-profile/:schoolId', function (req, res) {
         SchoolConfig.deleteSchoolProfile(req.params.schoolId, function (err) {
             if (err) {
-                res.status(500).send(err);
+                res.status(500).send({
+                    message: 'Failed to remove school profile id ' + req.params.schoolId + '.'
+                });
             } else {
                 res.status(200).send({message: 'ok'});
             }
@@ -105,7 +111,9 @@ module.exports = function (app) {
     app.delete(API + 'delete-school-year/:schoolYearId', function (req, res) {
         SchoolConfig.deleteSchoolYear(req.params.schoolYearId, function (err) {
             if (err) {
-                res.status(500).send(err);
+                res.status(500).send({
+                    message: 'Failed to remove school year id ' + req.params.schoolYearId + '.'
+                });
             } else {
                 res.status(200).send({message: 'ok'});
             }
@@ -149,7 +157,55 @@ module.exports = function (app) {
     app.delete(API + 'delete-school-sem/:schoolSemId', function (req, res) {
         SchoolConfig.deleteSchoolSem(req.params.schoolSemId, function (err) {
             if (err) {
+                res.status(500).send({
+                    message: 'Failed to remove school sem id ' + req.params.schoolSemId + '.'
+                });
+            } else {
+                res.status(200).send({message: 'ok'});
+            }
+        });
+    });
+    app.post(API + 'create-education-level', function (req, res) {
+        SchoolConfig.createEducationLevel(req.body, function (err, result) {
+            if (err) {
                 res.status(500).send(err);
+            } else {
+                res.status(200).send({
+                    message: 'ok',
+                    result: result._id
+                });
+            }
+        });
+    });
+
+    app.put(API + 'update-education-level/:educationLevelId', function (req, res) {
+        SchoolConfig.updateEducationLevel(req.params.educationLevelId, req.body, function (err) {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(200).send({
+                    message: 'ok'
+                });
+            }
+        });
+    });
+
+    app.get(API + 'get-education-level/:educationLevelId', function (req, res) {
+        SchoolConfig.getEducationLevel(req.params.educationLevelId, function (err, result) {
+            if (err) {
+                res.status(500).send({message: "Education Level not found."});
+            } else {
+                res.status(200).send(result);
+            }
+        });
+    });
+
+    app.delete(API + 'delete-education-level/:educationLevelId', function (req, res) {
+        SchoolConfig.deleteEducationLevel(req.params.educationLevelId, function (err) {
+            if (err) {
+                res.status(500).send({
+                    message: 'Failed to remove education level id ' + req.params.educationLevelId + '.'
+                });
             } else {
                 res.status(200).send({message: 'ok'});
             }
