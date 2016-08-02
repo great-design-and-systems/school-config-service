@@ -22,7 +22,11 @@ module.exports = function (app) {
                 createEducationLevel: 'http://' + req.headers.host + API + 'create-education-level',
                 getEducationLevel: 'http://' + req.headers.host + API + 'get-education-level/{educationLevelId}',
                 updateEducationLevel: 'http://' + req.headers.host + API + 'update-education-level/{educationLevelId}',
-                deleteEducationLevel: 'http://' + req.headers.host + API + 'delete-education-level/{educationLevelId}'
+                deleteEducationLevel: 'http://' + req.headers.host + API + 'delete-education-level/{educationLevelId}',
+                createDepartment: 'http://' + req.headers.host + API + 'create-department',
+                getDepartment: 'http://' + req.headers.host + API + 'get-department/{departmentId}',
+                updateDepartment: 'http://' + req.headers.host + API + 'update-department/{departmentId}',
+                deleteDepartment: 'http://' + req.headers.host + API + 'delete-department/{departmentId}'
             }
         });
     });
@@ -205,6 +209,52 @@ module.exports = function (app) {
             if (err) {
                 res.status(500).send({
                     message: 'Failed to remove education level id ' + req.params.educationLevelId + '.'
+                });
+            } else {
+                res.status(200).send({message: 'ok'});
+            }
+        });
+    });
+    app.post(API + 'create-department', function (req, res) {
+        SchoolConfig.createDepartment(req.body, function (err, result) {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(200).send({
+                    message: 'ok',
+                    result: result._id
+                });
+            }
+        });
+    });
+
+    app.put(API + 'update-department/:departmentId', function (req, res) {
+        SchoolConfig.updateDepartment(req.params.departmentId, req.body, function (err) {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(200).send({
+                    message: 'ok'
+                });
+            }
+        });
+    });
+
+    app.get(API + 'get-department/:departmentId', function (req, res) {
+        SchoolConfig.getDepartment(req.params.departmentId, function (err, result) {
+            if (err) {
+                res.status(500).send({message: "Department not found."});
+            } else {
+                res.status(200).send(result);
+            }
+        });
+    });
+
+    app.delete(API + 'delete-department/:departmentId', function (req, res) {
+        SchoolConfig.deleteDepartment(req.params.departmentId, function (err) {
+            if (err) {
+                res.status(500).send({
+                    message: 'Failed to remove department id ' + req.params.departmentId + '.'
                 });
             } else {
                 res.status(200).send({message: 'ok'});

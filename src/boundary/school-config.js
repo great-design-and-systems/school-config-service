@@ -15,6 +15,10 @@ var CreateEducationLevel = require('../control/create-education-level');
 var UpdateEducationLevel= require('../control/update-education-level');
 var GetEducationLevel = require('../control/get-education-level-by-education-level-id');
 var DeleteEducationLevel = require('../control/delete-education-level');
+var CreateDepartment = require('../control/create-department');
+var UpdateDepartment= require('../control/update-department');
+var GetDepartment = require('../control/get-department-by-department-id');
+var DeleteDepartment = require('../control/delete-department');
 module.exports = {
 	createSchoolProfile: function (param, callback) {
 		new CreateSchoolProfile({
@@ -128,5 +132,33 @@ module.exports = {
     },
     deleteEducationLevel: function (educationLevelId, callback) {
         new DeleteEducationLevel(educationLevelId, callback);
+    },
+    createDepartment: function (param, callback) {
+		new CreateDepartment({
+			name: param.name,
+			description: param.description,
+			schoolId: param.schoolId,
+			createdBy: param.createdBy,
+			updatedBy: param.createdBy}, callback);
+    },
+    updateDepartment: function (departmentId, updateParam, callback) {
+    	updateParam.updatedOn = new Date();
+    	new UpdateDepartment(departmentId, updateParam, callback);
+    },
+    getDepartment: function (departmentId, callback) {
+        new GetDepartment(departmentId, function (err, result) {
+        	if (err) {
+        		callback(err);
+        	} else {
+        		if (result) {
+        			callback(null, result);
+        		} else {
+        			callback(true, null);
+        		}
+        	}
+        });
+    },
+    deleteDepartment: function (departmentId, callback) {
+        new DeleteDepartment(departmentId, callback);
     }
 };

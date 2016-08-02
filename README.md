@@ -65,3 +65,18 @@ update-education-level
 	"schoolId" : "School Id",
 	"updatedBy" : "username"
 }
+create-department
+{
+	"name" : "Department Name",
+	"description" : "Description",
+	"schoolId" : "School Id",
+	"createdBy" : "username"
+}
+
+update-department
+{
+	"name" : "Department Name",
+	"description" : "Description",
+	"schoolId" : "School Id",
+	"updatedBy" : "username"
+}
