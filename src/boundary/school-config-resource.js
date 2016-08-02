@@ -14,7 +14,11 @@ module.exports = function (app) {
                 createSchoolYear: 'http://' + req.headers.host + API + 'create-school-year',
                 getSchoolYear: 'http://' + req.headers.host + API + 'get-school-year/{schoolYearId}',
                 updateSchoolYear: 'http://' + req.headers.host + API + 'update-school-year/{schoolYearId}',
-                deleteSchoolYear: 'http://' + req.headers.host + API + 'delete-school-year/{schoolYearId}'
+                deleteSchoolYear: 'http://' + req.headers.host + API + 'delete-school-year/{schoolYearId}',
+                createSchoolSem: 'http://' + req.headers.host + API + 'create-school-sem',
+                getSchoolSem: 'http://' + req.headers.host + API + 'get-school-sem/{schoolSemId}',
+                updateSchoolSem: 'http://' + req.headers.host + API + 'update-school-sem/{schoolSemId}',
+                deleteSchoolSem: 'http://' + req.headers.host + API + 'delete-school-sem/{schoolSemId}'
             }
         });
     });
@@ -100,6 +104,50 @@ module.exports = function (app) {
 
     app.delete(API + 'delete-school-year/:schoolYearId', function (req, res) {
         SchoolConfig.deleteSchoolYear(req.params.schoolYearId, function (err) {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(200).send({message: 'ok'});
+            }
+        });
+    });
+    app.post(API + 'create-school-sem', function (req, res) {
+        SchoolConfig.createSchoolSem(req.body, function (err, result) {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(200).send({
+                    message: 'ok',
+                    result: result._id
+                });
+            }
+        });
+    });
+
+    app.put(API + 'update-school-sem/:schoolSemId', function (req, res) {
+        SchoolConfig.updateSchoolSem(req.params.schoolSemId, req.body, function (err) {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(200).send({
+                    message: 'ok'
+                });
+            }
+        });
+    });
+
+    app.get(API + 'get-school-sem/:schoolSemId', function (req, res) {
+        SchoolConfig.getSchoolSem(req.params.schoolSemId, function (err, result) {
+            if (err) {
+                res.status(500).send({message: "Semester not found."});
+            } else {
+                res.status(200).send(result);
+            }
+        });
+    });
+
+    app.delete(API + 'delete-school-sem/:schoolSemId', function (req, res) {
+        SchoolConfig.deleteSchoolSem(req.params.schoolSemId, function (err) {
             if (err) {
                 res.status(500).send(err);
             } else {

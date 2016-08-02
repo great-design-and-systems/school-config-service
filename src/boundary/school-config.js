@@ -7,6 +7,10 @@ var CreateSchoolYear = require('../control/create-school-year');
 var UpdateSchoolYear= require('../control/update-school-year');
 var GetSchoolYear = require('../control/get-school-year-by-school-year-id');
 var DeleteSchoolYear = require('../control/delete-school-year');
+var CreateSchoolSem = require('../control/create-school-sem');
+var UpdateSchoolSem= require('../control/update-school-sem');
+var GetSchoolSem = require('../control/get-school-sem-by-school-sem-id');
+var DeleteSchoolSem = require('../control/delete-school-sem');
 module.exports = {
 	createSchoolProfile: function (param, callback) {
 		new CreateSchoolProfile({
@@ -63,5 +67,34 @@ module.exports = {
     },
     deleteSchoolYear: function (schoolYearId, callback) {
         new DeleteSchoolYear(schoolYearId, callback);
+    },
+	createSchoolSem: function (param, callback) {
+		new CreateSchoolSem({
+			description: param.description,
+			dateStart: param.dateStart,
+			dateEnd: param.dateEnd,
+			schoolId: param.schoolId,
+			createdBy: param.createdBy,
+			updatedBy: param.createdBy}, callback);
+    },
+    updateSchoolSem: function (schoolSemId, updateParam, callback) {
+    	updateParam.updatedOn = new Date();
+    	new UpdateSchoolSem(schoolSemId, updateParam, callback);
+    },
+    getSchoolSem: function (schoolSemId, callback) {
+        new GetSchoolSem(schoolSemId, function (err, result) {
+        	if (err) {
+        		callback(err);
+        	} else {
+        		if (result) {
+        			callback(null, result);
+        		} else {
+        			callback(true, null);
+        		}
+        	}
+        });
+    },
+    deleteSchoolSem: function (schoolSemId, callback) {
+        new DeleteSchoolSem(schoolSemId, callback);
     }
 };

@@ -4,14 +4,14 @@ create-school-profile
 {
 	"name" : "School Name",
 	"address" : "School Address",
-	"createdBy" : "userId"
+	"createdBy" : "username"
 }
 
 update-school-profile
 {
 	"name" : "School Name",
 	"address" : "School Address",
-	"updatedBy" : "userId"
+	"updatedBy" : "username"
 }
 
 create-school-year
@@ -20,7 +20,7 @@ create-school-year
 	"dateStart" : "yyyy-mm-dd",
 	"dateEnd" : "yyyy-mm-dd",
 	"schoolId" : "School Id",
-	"createdBy" : "userId"
+	"createdBy" : "username"
 }
 
 update-school-year
@@ -29,5 +29,23 @@ update-school-year
 	"dateStart" : "yyyy-mm-dd",
 	"dateEnd" : "yyyy-mm-dd",
 	"schoolId" : "School Id",
-	"updatedBy" : "userId"
+	"updatedBy" : "username"
+}
+
+create-school-sem
+{
+	"description" : "School Sem Description",
+	"dateStart" : "yyyy-mm-dd",
+	"dateEnd" : "yyyy-mm-dd",
+	"schoolYearId" : "School Year Id",
+	"createdBy" : "username"
+}
+
+update-school-sem
+{
+	"description" : "School Sem Description",
+	"dateStart" : "yyyy-mm-dd",
+	"dateEnd" : "yyyy-mm-dd",
+	"schoolYearId" : "School Year Id",
+	"updatedBy" : "username"
 }
