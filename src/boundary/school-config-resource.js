@@ -26,7 +26,11 @@ module.exports = function (app) {
                 createDepartment: 'http://' + req.headers.host + API + 'create-department',
                 getDepartment: 'http://' + req.headers.host + API + 'get-department/{departmentId}',
                 updateDepartment: 'http://' + req.headers.host + API + 'update-department/{departmentId}',
-                deleteDepartment: 'http://' + req.headers.host + API + 'delete-department/{departmentId}'
+                deleteDepartment: 'http://' + req.headers.host + API + 'delete-department/{departmentId}',
+                createTheme: 'http://' + req.headers.host + API + 'create-theme',
+                getTheme: 'http://' + req.headers.host + API + 'get-theme/{themeId}',
+                updateTheme: 'http://' + req.headers.host + API + 'update-theme/{themeId}',
+                deleteTheme: 'http://' + req.headers.host + API + 'delete-theme/{themeId}'
             }
         });
     });
@@ -255,6 +259,53 @@ module.exports = function (app) {
             if (err) {
                 res.status(500).send({
                     message: 'Failed to remove department id ' + req.params.departmentId + '.'
+                });
+            } else {
+                res.status(200).send({message: 'ok'});
+            }
+        });
+    });
+    
+    app.post(API + 'create-theme', function (req, res) {
+        SchoolConfig.createTheme(req.body, function (err, result) {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(200).send({
+                    message: 'ok',
+                    result: result._id
+                });
+            }
+        });
+    });
+
+    app.put(API + 'update-theme/:themeId', function (req, res) {
+        SchoolConfig.updateTheme(req.params.themeId, req.body, function (err) {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(200).send({
+                    message: 'ok'
+                });
+            }
+        });
+    });
+
+    app.get(API + 'get-theme/:themeId', function (req, res) {
+        SchoolConfig.getTheme(req.params.themeId, function (err, result) {
+            if (err) {
+                res.status(500).send({message: "Theme not found."});
+            } else {
+                res.status(200).send(result);
+            }
+        });
+    });
+
+    app.delete(API + 'delete-theme/:themeId', function (req, res) {
+        SchoolConfig.deleteTheme(req.params.themeId, function (err) {
+            if (err) {
+                res.status(500).send({
+                    message: 'Failed to remove theme id ' + req.params.themeId + '.'
                 });
             } else {
                 res.status(200).send({message: 'ok'});

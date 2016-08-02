@@ -7,6 +7,7 @@ var ThemeSchema = new mongoose.Schema({
     },
     logo: String,
     description: String,
+    schoolId: String,
     createdBy: {
         type: String,
         required: [true, 'Created By is required.']

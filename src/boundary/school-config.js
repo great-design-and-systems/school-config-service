@@ -19,6 +19,10 @@ var CreateDepartment = require('../control/create-department');
 var UpdateDepartment= require('../control/update-department');
 var GetDepartment = require('../control/get-department-by-department-id');
 var DeleteDepartment = require('../control/delete-department');
+var CreateTheme = require('../control/create-theme');
+var UpdateTheme= require('../control/update-theme');
+var GetTheme = require('../control/get-theme-by-theme-id');
+var DeleteTheme = require('../control/delete-theme');
 module.exports = {
 	createSchoolProfile: function (param, callback) {
 		new CreateSchoolProfile({
@@ -160,5 +164,34 @@ module.exports = {
     },
     deleteDepartment: function (departmentId, callback) {
         new DeleteDepartment(departmentId, callback);
+    },
+    createTheme: function (param, callback) {
+		new CreateTheme({
+			templateName: param.templateName,
+			description: param.description,
+			logo: param.logo,
+			schoolId: param.schoolId,
+			createdBy: param.createdBy,
+			updatedBy: param.createdBy}, callback);
+    },
+    updateTheme: function (themeId, updateParam, callback) {
+    	updateParam.updatedOn = new Date();
+    	new UpdateTheme(themeId, updateParam, callback);
+    },
+    getTheme: function (themeId, callback) {
+        new GetTheme(themeId, function (err, result) {
+        	if (err) {
+        		callback(err);
+        	} else {
+        		if (result) {
+        			callback(null, result);
+        		} else {
+        			callback(true, null);
+        		}
+        	}
+        });
+    },
+    deleteTheme: function (themeId, callback) {
+        new DeleteTheme(themeId, callback);
     }
 };

@@ -65,6 +65,7 @@ update-education-level
 	"schoolId" : "School Id",
 	"updatedBy" : "username"
 }
+
 create-department
 {
 	"name" : "Department Name",
@@ -77,6 +78,24 @@ update-department
 {
 	"name" : "Department Name",
 	"description" : "Description",
+	"schoolId" : "School Id",
+	"updatedBy" : "username"
+}
+
+create-theme
+{
+	"templateName" : "Template Name",
+	"description" : "Description",
+	"logo" : "logo",
+	"schoolId" : "School Id",
+	"createdBy" : "username"
+}
+
+update-theme
+{
+	"templateName" : "Template Name",
+	"description" : "Description",
+	"logo" : "logo",
 	"schoolId" : "School Id",
 	"updatedBy" : "username"
 }
