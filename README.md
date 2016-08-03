@@ -99,3 +99,19 @@ update-theme
 	"schoolId" : "School Id",
 	"updatedBy" : "username"
 }
+
+create-code
+{
+	"codeType" : "Code Name",
+	"codeValue" : "Code Value",
+	"schoolId" : "School Id",
+	"createdBy" : "username"
+}
+
+update-code
+{
+	"codeType" : "Code Name",
+	"codeValue" : "Code Value",
+	"schoolId" : "School Id",
+	"updatedBy" : "username"
+}

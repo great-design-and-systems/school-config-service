@@ -30,7 +30,11 @@ module.exports = function (app) {
                 createTheme: 'http://' + req.headers.host + API + 'create-theme',
                 getTheme: 'http://' + req.headers.host + API + 'get-theme/{themeId}',
                 updateTheme: 'http://' + req.headers.host + API + 'update-theme/{themeId}',
-                deleteTheme: 'http://' + req.headers.host + API + 'delete-theme/{themeId}'
+                deleteTheme: 'http://' + req.headers.host + API + 'delete-theme/{themeId}',
+                createCode: 'http://' + req.headers.host + API + 'create-code',
+                getCodes: 'http://' + req.headers.host + API + 'get-codes/{codeType}/{schoolId}',
+                updateCode: 'http://' + req.headers.host + API + 'update-code/{codeId}',
+                deleteCode: 'http://' + req.headers.host + API + 'delete-code/{codeId}'
             }
         });
     });
@@ -306,6 +310,57 @@ module.exports = function (app) {
             if (err) {
                 res.status(500).send({
                     message: 'Failed to remove theme id ' + req.params.themeId + '.'
+                });
+            } else {
+                res.status(200).send({message: 'ok'});
+            }
+        });
+    });
+    
+    app.post(API + 'create-code', function (req, res) {
+        SchoolConfig.createCode(req.body, function (err, result) {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(200).send({
+                    message: 'ok',
+                    result: result._id
+                });
+            }
+        });
+    });
+
+    app.put(API + 'update-code/:codeId', function (req, res) {
+        SchoolConfig.updateCode(req.params.codeId, req.body, function (err) {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(200).send({
+                    message: 'ok'
+                });
+            }
+        });
+    });
+
+    app.get(API + 'get-codes/:codeType/:schoolId', function (req, res) {
+        SchoolConfig.getCodes(req.params, function (err, result) {
+            if (err) {
+                res.status(500).send({message: "Code not found."});
+            } else {
+            	if (result && result.length > 0) {
+            		res.status(200).send(result);
+            	} else {
+            		res.status(200).send({message: "No records found."});
+            	}
+            }
+        });
+    });
+
+    app.delete(API + 'delete-code/:codeId', function (req, res) {
+        SchoolConfig.deleteCode(req.params.codeId, function (err) {
+            if (err) {
+                res.status(500).send({
+                    message: 'Failed to remove code id ' + req.params.codeId + '.'
                 });
             } else {
                 res.status(200).send({message: 'ok'});

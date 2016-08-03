@@ -23,6 +23,10 @@ var CreateTheme = require('../control/create-theme');
 var UpdateTheme= require('../control/update-theme');
 var GetTheme = require('../control/get-theme-by-theme-id');
 var DeleteTheme = require('../control/delete-theme');
+var CreateCode = require('../control/create-code');
+var UpdateCode= require('../control/update-code');
+var GetCodes = require('../control/get-codes');
+var DeleteCode = require('../control/delete-code');
 module.exports = {
 	createSchoolProfile: function (param, callback) {
 		new CreateSchoolProfile({
@@ -193,5 +197,33 @@ module.exports = {
     },
     deleteTheme: function (themeId, callback) {
         new DeleteTheme(themeId, callback);
+    },
+    createCode: function (param, callback) {
+		new CreateCode({
+			codeType: param.codeType,
+			codeValue: param.codeValue,
+			schoolId: param.schoolId,
+			createdBy: param.createdBy,
+			updatedBy: param.createdBy}, callback);
+    },
+    updateCode: function (codeId, updateParam, callback) {
+    	updateParam.updatedOn = new Date();
+    	new UpdateCode(codeId, updateParam, callback);
+    },
+    getCodes: function (params, callback) {
+        new GetCodes(params, function (err, result) {
+        	if (err) {
+        		callback(err);
+        	} else {
+        		if (result) {
+        			callback(null, result);
+        		} else {
+        			callback(true, null);
+        		}
+        	}
+        });
+    },
+    deleteCode: function (codeId, callback) {
+        new DeleteCode(codeId, callback);
     }
 };

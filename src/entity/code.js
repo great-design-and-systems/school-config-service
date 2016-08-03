@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var CodeSchema = new mongoose.Schema({
-    codeName: {
+    codeType: {
         type: String,
         required: [true, 'Code Name is required.']
     },
@@ -9,6 +9,7 @@ var CodeSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Code Value is required.']
     },
+    schoolId: String,
     createdBy: {
         type: String,
         required: [true, 'Created By is required.']
