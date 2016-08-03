@@ -2,8 +2,8 @@
 
 var Theme = require('../entity/theme');
 
-function execute(condition, update, callback) {
-	Theme.update(condition, update, callback);
+function execute(id, update, callback) {
+	Theme.update({_id : id}, update, callback);
 }
 
 module.exports = execute;

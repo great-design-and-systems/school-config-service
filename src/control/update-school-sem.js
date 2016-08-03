@@ -2,8 +2,8 @@
 
 var SchoolSem = require('../entity/school-sem');
 
-function execute(condition, update, callback) {
-	SchoolSem.update(condition, update, callback);
+function execute(id, update, callback) {
+	SchoolSem.update({_id : id}, update, callback);
 }
 
 module.exports = execute;

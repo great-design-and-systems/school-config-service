@@ -2,8 +2,8 @@
 
 var SchoolYear= require('../entity/school-year');
 
-function execute(condition, update, callback) {
-	SchoolYear.update(condition, update, callback);
+function execute(id, update, callback) {
+	SchoolYear.update({_id : id}, update, callback);
 }
 
 module.exports = execute;

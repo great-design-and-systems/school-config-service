@@ -2,8 +2,8 @@
 
 var Department = require('../entity/department');
 
-function execute(condition, update, callback) {
-	Department.update(condition, update, callback);
+function execute(id, update, callback) {
+	Department.update({_id : id}, update, callback);
 }
 
 module.exports = execute;

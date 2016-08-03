@@ -2,8 +2,8 @@
 
 var SchoolProfile = require('../entity/school-profile');
 
-function execute(condition, update, callback) {
-	SchoolProfile.update(condition, update, callback);
+function execute(id, update, callback) {
+	SchoolProfile.update({_id : id}, update, callback);
 }
 
 module.exports = execute;
