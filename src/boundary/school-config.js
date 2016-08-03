@@ -6,22 +6,27 @@ var DeleteSchoolProfile = require('../control/delete-school-profile');
 var CreateSchoolYear = require('../control/create-school-year');
 var UpdateSchoolYear= require('../control/update-school-year');
 var GetSchoolYear = require('../control/get-school-year-by-school-year-id');
+var GetSchoolYears = require('../control/get-school-years');
 var DeleteSchoolYear = require('../control/delete-school-year');
 var CreateSchoolSem = require('../control/create-school-sem');
 var UpdateSchoolSem= require('../control/update-school-sem');
 var GetSchoolSem = require('../control/get-school-sem-by-school-sem-id');
+var GetSchoolSems = require('../control/get-school-sems');
 var DeleteSchoolSem = require('../control/delete-school-sem');
 var CreateEducationLevel = require('../control/create-education-level');
 var UpdateEducationLevel= require('../control/update-education-level');
 var GetEducationLevel = require('../control/get-education-level-by-education-level-id');
+var GetEducationLevels = require('../control/get-education-levels');
 var DeleteEducationLevel = require('../control/delete-education-level');
 var CreateDepartment = require('../control/create-department');
 var UpdateDepartment= require('../control/update-department');
 var GetDepartment = require('../control/get-department-by-department-id');
+var GetDepartments = require('../control/get-departments');
 var DeleteDepartment = require('../control/delete-department');
 var CreateTheme = require('../control/create-theme');
 var UpdateTheme= require('../control/update-theme');
 var GetTheme = require('../control/get-theme-by-theme-id');
+var GetThemes = require('../control/get-themes');
 var DeleteTheme = require('../control/delete-theme');
 var CreateCode = require('../control/create-code');
 var UpdateCode= require('../control/update-code');
@@ -81,6 +86,19 @@ module.exports = {
         	}
         });
     },
+    getSchoolYears: function (params, callback) {
+        new GetSchoolYears(params, function (err, result) {
+        	if (err) {
+        		callback(err);
+        	} else {
+        		if (result) {
+        			callback(null, result);
+        		} else {
+        			callback(true, null);
+        		}
+        	}
+        });
+    },
     deleteSchoolYear: function (schoolYearId, callback) {
         new DeleteSchoolYear(schoolYearId, callback);
     },
@@ -89,7 +107,7 @@ module.exports = {
 			description: param.description,
 			dateStart: param.dateStart,
 			dateEnd: param.dateEnd,
-			schoolId: param.schoolId,
+			schoolYearId: param.schoolYearId,
 			createdBy: param.createdBy,
 			updatedBy: param.createdBy}, callback);
     },
@@ -99,6 +117,19 @@ module.exports = {
     },
     getSchoolSem: function (schoolSemId, callback) {
         new GetSchoolSem(schoolSemId, function (err, result) {
+        	if (err) {
+        		callback(err);
+        	} else {
+        		if (result) {
+        			callback(null, result);
+        		} else {
+        			callback(true, null);
+        		}
+        	}
+        });
+    },
+    getSchoolSems: function (params, callback) {
+        new GetSchoolSems(params, function (err, result) {
         	if (err) {
         		callback(err);
         	} else {
@@ -138,6 +169,19 @@ module.exports = {
         	}
         });
     },
+    getEducationLevels: function (params, callback) {
+        new GetEducationLevels(params, function (err, result) {
+        	if (err) {
+        		callback(err);
+        	} else {
+        		if (result) {
+        			callback(null, result);
+        		} else {
+        			callback(true, null);
+        		}
+        	}
+        });
+    },
     deleteEducationLevel: function (educationLevelId, callback) {
         new DeleteEducationLevel(educationLevelId, callback);
     },
@@ -155,6 +199,19 @@ module.exports = {
     },
     getDepartment: function (departmentId, callback) {
         new GetDepartment(departmentId, function (err, result) {
+        	if (err) {
+        		callback(err);
+        	} else {
+        		if (result) {
+        			callback(null, result);
+        		} else {
+        			callback(true, null);
+        		}
+        	}
+        });
+    },
+    getDepartments: function (params, callback) {
+        new GetDepartments(params, function (err, result) {
         	if (err) {
         		callback(err);
         	} else {
@@ -184,6 +241,19 @@ module.exports = {
     },
     getTheme: function (themeId, callback) {
         new GetTheme(themeId, function (err, result) {
+        	if (err) {
+        		callback(err);
+        	} else {
+        		if (result) {
+        			callback(null, result);
+        		} else {
+        			callback(true, null);
+        		}
+        	}
+        });
+    },
+    getThemes: function (params, callback) {
+        new GetThemes(params, function (err, result) {
         	if (err) {
         		callback(err);
         	} else {

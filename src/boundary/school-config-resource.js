@@ -13,22 +13,27 @@ module.exports = function (app) {
                 deleteSchoolProfile: 'http://' + req.headers.host + API + 'delete-school-profile/{schoolId}',
                 createSchoolYear: 'http://' + req.headers.host + API + 'create-school-year',
                 getSchoolYear: 'http://' + req.headers.host + API + 'get-school-year/{schoolYearId}',
+                getSchoolYearBySchoolId: 'http://' + req.headers.host + API + 'get-school-year-by-school/{schoolId}',
                 updateSchoolYear: 'http://' + req.headers.host + API + 'update-school-year/{schoolYearId}',
                 deleteSchoolYear: 'http://' + req.headers.host + API + 'delete-school-year/{schoolYearId}',
                 createSchoolSem: 'http://' + req.headers.host + API + 'create-school-sem',
                 getSchoolSem: 'http://' + req.headers.host + API + 'get-school-sem/{schoolSemId}',
+                getSchoolSemBySchoolYearId: 'http://' + req.headers.host + API + 'get-school-sem-by-school-year/{schoolYearId}',
                 updateSchoolSem: 'http://' + req.headers.host + API + 'update-school-sem/{schoolSemId}',
                 deleteSchoolSem: 'http://' + req.headers.host + API + 'delete-school-sem/{schoolSemId}',
                 createEducationLevel: 'http://' + req.headers.host + API + 'create-education-level',
                 getEducationLevel: 'http://' + req.headers.host + API + 'get-education-level/{educationLevelId}',
+                getEducationLevelBySchoolId: 'http://' + req.headers.host + API + 'get-education-level-by-school/{schoolId}',
                 updateEducationLevel: 'http://' + req.headers.host + API + 'update-education-level/{educationLevelId}',
                 deleteEducationLevel: 'http://' + req.headers.host + API + 'delete-education-level/{educationLevelId}',
                 createDepartment: 'http://' + req.headers.host + API + 'create-department',
                 getDepartment: 'http://' + req.headers.host + API + 'get-department/{departmentId}',
+                getDepartmentBySchoolId: 'http://' + req.headers.host + API + 'get-department-by-school/{schoolId}',
                 updateDepartment: 'http://' + req.headers.host + API + 'update-department/{departmentId}',
                 deleteDepartment: 'http://' + req.headers.host + API + 'delete-department/{departmentId}',
                 createTheme: 'http://' + req.headers.host + API + 'create-theme',
                 getTheme: 'http://' + req.headers.host + API + 'get-theme/{themeId}',
+                getThemeBySchoolId: 'http://' + req.headers.host + API + 'get-theme-by-school/{schoolId}',
                 updateTheme: 'http://' + req.headers.host + API + 'update-theme/{themeId}',
                 deleteTheme: 'http://' + req.headers.host + API + 'delete-theme/{themeId}',
                 createCode: 'http://' + req.headers.host + API + 'create-code',
@@ -119,6 +124,20 @@ module.exports = function (app) {
             }
         });
     });
+    
+    app.get(API + 'get-school-year-by-school/:schoolId', function (req, res) {
+        SchoolConfig.getSchoolYears(req.params, function (err, result) {
+            if (err) {
+                res.status(500).send({message: "School Year not found."});
+            } else {
+            	if (result && result.length > 0) {
+            		res.status(200).send(result);
+            	} else {
+            		res.status(200).send({message: "No records found."});
+            	}
+            }
+        });
+    });
 
     app.delete(API + 'delete-school-year/:schoolYearId', function (req, res) {
         SchoolConfig.deleteSchoolYear(req.params.schoolYearId, function (err) {
@@ -162,6 +181,20 @@ module.exports = function (app) {
                 res.status(500).send({message: "Semester not found."});
             } else {
                 res.status(200).send(result);
+            }
+        });
+    });
+    
+    app.get(API + 'get-school-sem-by-school-year/:schoolYearId', function (req, res) {
+        SchoolConfig.getSchoolSems(req.params, function (err, result) {
+            if (err) {
+                res.status(500).send({message: "School Sem not found."});
+            } else {
+            	if (result && result.length > 0) {
+            		res.status(200).send(result);
+            	} else {
+            		res.status(200).send({message: "No records found."});
+            	}
             }
         });
     });
@@ -211,6 +244,20 @@ module.exports = function (app) {
             }
         });
     });
+    
+    app.get(API + 'get-education-level-by-school/:schoolId', function (req, res) {
+        SchoolConfig.getEducationLevels(req.params, function (err, result) {
+            if (err) {
+                res.status(500).send({message: "Education Level not found."});
+            } else {
+            	if (result && result.length > 0) {
+            		res.status(200).send(result);
+            	} else {
+            		res.status(200).send({message: "No records found."});
+            	}
+            }
+        });
+    });
 
     app.delete(API + 'delete-education-level/:educationLevelId', function (req, res) {
         SchoolConfig.deleteEducationLevel(req.params.educationLevelId, function (err) {
@@ -254,6 +301,20 @@ module.exports = function (app) {
                 res.status(500).send({message: "Department not found."});
             } else {
                 res.status(200).send(result);
+            }
+        });
+    });
+    
+    app.get(API + 'get-department-by-school/:schoolId', function (req, res) {
+        SchoolConfig.getDepartments(req.params, function (err, result) {
+            if (err) {
+                res.status(500).send({message: "Department not found."});
+            } else {
+            	if (result && result.length > 0) {
+            		res.status(200).send(result);
+            	} else {
+            		res.status(200).send({message: "No records found."});
+            	}
             }
         });
     });
@@ -301,6 +362,20 @@ module.exports = function (app) {
                 res.status(500).send({message: "Theme not found."});
             } else {
                 res.status(200).send(result);
+            }
+        });
+    });
+    
+    app.get(API + 'get-theme-by-school/:schoolId', function (req, res) {
+        SchoolConfig.getThemes(req.params, function (err, result) {
+            if (err) {
+                res.status(500).send({message: "Theme not found."});
+            } else {
+            	if (result && result.length > 0) {
+            		res.status(200).send(result);
+            	} else {
+            		res.status(200).send({message: "No records found."});
+            	}
             }
         });
     });
