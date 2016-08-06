@@ -7,39 +7,138 @@ module.exports = function (app) {
         res.status(200).send({
             domain: process.env.DOMAIN_NAME || 'School Config',
             links: {
-                createSchoolProfile: 'http://' + req.headers.host + API + 'create-school-profile',
-                getSchoolProfile: 'http://' + req.headers.host + API + 'get-school-profile/{schoolId}',
-                updateSchoolProfile: 'http://' + req.headers.host + API + 'update-school-profile/{schoolId}',
-                deleteSchoolProfile: 'http://' + req.headers.host + API + 'delete-school-profile/{schoolId}',
-                createSchoolYear: 'http://' + req.headers.host + API + 'create-school-year',
-                getSchoolYear: 'http://' + req.headers.host + API + 'get-school-year/{schoolYearId}',
-                getSchoolYearBySchoolId: 'http://' + req.headers.host + API + 'get-school-year-by-school/{schoolId}',
-                updateSchoolYear: 'http://' + req.headers.host + API + 'update-school-year/{schoolYearId}',
-                deleteSchoolYear: 'http://' + req.headers.host + API + 'delete-school-year/{schoolYearId}',
-                createSchoolSem: 'http://' + req.headers.host + API + 'create-school-sem',
-                getSchoolSem: 'http://' + req.headers.host + API + 'get-school-sem/{schoolSemId}',
-                getSchoolSemBySchoolYearId: 'http://' + req.headers.host + API + 'get-school-sem-by-school-year/{schoolYearId}',
-                updateSchoolSem: 'http://' + req.headers.host + API + 'update-school-sem/{schoolSemId}',
-                deleteSchoolSem: 'http://' + req.headers.host + API + 'delete-school-sem/{schoolSemId}',
-                createEducationLevel: 'http://' + req.headers.host + API + 'create-education-level',
-                getEducationLevel: 'http://' + req.headers.host + API + 'get-education-level/{educationLevelId}',
-                getEducationLevelBySchoolId: 'http://' + req.headers.host + API + 'get-education-level-by-school/{schoolId}',
-                updateEducationLevel: 'http://' + req.headers.host + API + 'update-education-level/{educationLevelId}',
-                deleteEducationLevel: 'http://' + req.headers.host + API + 'delete-education-level/{educationLevelId}',
-                createDepartment: 'http://' + req.headers.host + API + 'create-department',
-                getDepartment: 'http://' + req.headers.host + API + 'get-department/{departmentId}',
-                getDepartmentBySchoolId: 'http://' + req.headers.host + API + 'get-department-by-school/{schoolId}',
-                updateDepartment: 'http://' + req.headers.host + API + 'update-department/{departmentId}',
-                deleteDepartment: 'http://' + req.headers.host + API + 'delete-department/{departmentId}',
-                createTheme: 'http://' + req.headers.host + API + 'create-theme',
-                getTheme: 'http://' + req.headers.host + API + 'get-theme/{themeId}',
-                getThemeBySchoolId: 'http://' + req.headers.host + API + 'get-theme-by-school/{schoolId}',
-                updateTheme: 'http://' + req.headers.host + API + 'update-theme/{themeId}',
-                deleteTheme: 'http://' + req.headers.host + API + 'delete-theme/{themeId}',
-                createCode: 'http://' + req.headers.host + API + 'create-code',
-                getCodes: 'http://' + req.headers.host + API + 'get-codes/{codeType}/{schoolId}',
-                updateCode: 'http://' + req.headers.host + API + 'update-code/{codeId}',
-                deleteCode: 'http://' + req.headers.host + API + 'delete-code/{codeId}'
+                createSchoolProfile: {
+                	method: 'POST',
+                	url: 'http://' + req.headers.host + API + 'create-school-profile'
+                },
+                getSchoolProfile: {
+                	method: 'GET',
+                	url: 'http://' + req.headers.host + API + 'get-school-profile/:schoolId'
+                },
+                updateSchoolProfile: {
+                	method: 'PUT',
+                	url: 'http://' + req.headers.host + API + 'update-school-profile/:schoolId'
+                },
+                deleteSchoolProfile: {
+                	method: 'DELETE',
+                	url: 'http://' + req.headers.host + API + 'delete-school-profile/:schoolId'
+                },
+                createSchoolYear: {
+                	method: 'POST',
+                	url: 'http://' + req.headers.host + API + 'create-school-year',
+            	},
+                getSchoolYear: {
+                	method: 'GET',
+                	url: 'http://' + req.headers.host + API + 'get-school-year/:schoolYearId',
+                },
+                getSchoolYearBySchoolId: {
+                	method: 'GET',
+                	url: 'http://' + req.headers.host + API + 'get-school-year-by-school/:schoolId',
+                },
+                updateSchoolYear: {
+                	method: 'PUT',
+                	url: 'http://' + req.headers.host + API + 'update-school-year/:schoolYearId'
+                },
+                deleteSchoolYear: {
+                	method: 'DELETE',
+                	url: 'http://' + req.headers.host + API + 'delete-school-year/:schoolYearId'
+                },
+                createSchoolSem: {
+                	method: 'POST',
+                	url: 'http://' + req.headers.host + API + 'create-school-sem'
+                },
+                getSchoolSem: {
+                	method: 'GET',
+                	url: 'http://' + req.headers.host + API + 'get-school-sem/:schoolSemId'
+                },
+                getSchoolSemBySchoolYearId: {
+                	method: 'GET',
+                	url: 'http://' + req.headers.host + API + 'get-school-sem-by-school-year/:schoolYearId'
+                },
+                updateSchoolSem: {
+                	method: 'PUT',
+                	url: 'http://' + req.headers.host + API + 'update-school-sem/:schoolSemId'
+                },
+                deleteSchoolSem: {
+                	method: 'DELETE',
+                	url: 'http://' + req.headers.host + API + 'delete-school-sem/:schoolSemId'
+                },
+                createEducationLevel: {
+                	method: 'POST',
+                	url: 'http://' + req.headers.host + API + 'create-education-level'
+                },
+                getEducationLevel: {
+                	method: 'GET',
+                	url: 'http://' + req.headers.host + API + 'get-education-level/:educationLevelId'
+                },
+                getEducationLevelBySchoolId: {
+                	method: 'GET',
+                	url: 'http://' + req.headers.host + API + 'get-education-level-by-school/:schoolId'
+                },
+                updateEducationLevel: {
+                	method: 'PUT',
+                	url: 'http://' + req.headers.host + API + 'update-education-level/:educationLevelId'
+                },
+                deleteEducationLevel: {
+                	method: 'DELETE',
+                	url: 'http://' + req.headers.host + API + 'delete-education-level/:educationLevelId'
+                },
+                createDepartment: {
+                	method: 'POST',
+                	url: 'http://' + req.headers.host + API + 'create-department'
+                },
+                getDepartment: {
+                	method: 'GET',
+                	url: 'http://' + req.headers.host + API + 'get-department/:departmentId'
+                },
+                getDepartmentBySchoolId: {
+                	method: 'GET',
+                	url: 'http://' + req.headers.host + API + 'get-department-by-school/:schoolId'
+                },
+                updateDepartment: {
+                	method: 'PUT',
+                	url: 'http://' + req.headers.host + API + 'update-department/:departmentId'
+                },
+                deleteDepartment: {
+                	method: 'DELETE',
+                	url: 'http://' + req.headers.host + API + 'delete-department/:departmentId'
+                },
+                createTheme: {
+                	method: 'POST',
+                	url: 'http://' + req.headers.host + API + 'create-theme'
+                },
+                getTheme: {
+                	method: 'GET',
+                	url: 'http://' + req.headers.host + API + 'get-theme/:themeId'
+                },
+                getThemeBySchoolId: {
+                	method: 'GET',
+                	url: 'http://' + req.headers.host + API + 'get-theme-by-school/:schoolId'
+                },
+                updateTheme: {
+                	method: 'PUT',
+                	url: 'http://' + req.headers.host + API + 'update-theme/:themeId'
+                },
+                deleteTheme: {
+                	method: 'DELETE',
+                	url: 'http://' + req.headers.host + API + 'delete-theme/:themeId'
+                },
+                createCode: {
+                	method: 'POST',
+                	url: 'http://' + req.headers.host + API + 'create-code'
+                },
+                getCodes: {
+                	method: 'GET',
+                	url: 'http://' + req.headers.host + API + 'get-codes/:codeType/:schoolId'
+                },
+                updateCode: {
+                	method: 'PUT',
+                	url: 'http://' + req.headers.host + API + 'update-code/:codeId'
+                },
+                deleteCode: {
+                	method: 'DELETE',
+                	url: 'http://' + req.headers.host + API + 'delete-code/:codeId'
+                }
             }
         });
     });
