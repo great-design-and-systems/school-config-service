@@ -271,6 +271,7 @@ module.exports = {
     createCode: function (param, callback) {
 		new CreateCode({
 			codeType: param.codeType,
+			codeName: param.codeName,
 			codeValue: param.codeValue,
 			schoolId: param.schoolId,
 			createdBy: param.createdBy,

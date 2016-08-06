@@ -102,7 +102,8 @@ update-theme
 
 create-code
 {
-	"codeType" : "Code Name",
+	"codeType" : "Code Type",
+	"codeName" : "Code Name",
 	"codeValue" : "Code Value",
 	"schoolId" : "School Id",
 	"createdBy" : "username"
@@ -110,7 +111,8 @@ create-code
 
 update-code
 {
-	"codeType" : "Code Name",
+	"codeType" : "Code Type",
+	"codeName" : "Code Name",
 	"codeValue" : "Code Value",
 	"schoolId" : "School Id",
 	"updatedBy" : "username"

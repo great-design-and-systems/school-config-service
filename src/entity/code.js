@@ -3,6 +3,10 @@ var mongoose = require('mongoose');
 var CodeSchema = new mongoose.Schema({
     codeType: {
         type: String,
+        required: [true, 'Code Type is required.']
+    },
+    codeName: {
+        type: String,
         required: [true, 'Code Name is required.']
     },
     codeValue: {

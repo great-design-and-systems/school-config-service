@@ -15,6 +15,7 @@ describe('Code BDD', function () {
 
     describe('GIVEN: I have code data', function () {
     	var codeType = 'Purpose';
+    	var codeName = 'school_purpose';
         var codeValue = 'Research';
         var schoolId = '57a09a22e3f0b653036c0eb1';
         var username = 'analyn';
@@ -22,6 +23,7 @@ describe('Code BDD', function () {
 
         beforeEach(function () {
         	data.codeType = codeType;
+        	data.codeName = codeName;
             data.codeValue = codeValue;
             data.schoolId = schoolId;
             data.createdBy = username;
