@@ -528,7 +528,7 @@ module.exports = function (app) {
             	if (result && result.length > 0) {
             		res.status(200).send(result);
             	} else {
-            		res.status(200).send({message: "Code not found."});
+            		res.status(200).send([]);
             	}
             }
         });
