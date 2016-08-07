@@ -31,6 +31,7 @@ var DeleteTheme = require('../control/delete-theme');
 var CreateCode = require('../control/create-code');
 var UpdateCode= require('../control/update-code');
 var GetCodes = require('../control/get-codes');
+var GetCode = require('../control/get-code');
 var DeleteCode = require('../control/delete-code');
 module.exports = {
 	createSchoolProfile: function (param, callback) {
@@ -283,6 +284,19 @@ module.exports = {
     },
     getCodes: function (params, callback) {
         new GetCodes(params, function (err, result) {
+        	if (err) {
+        		callback(err);
+        	} else {
+        		if (result) {
+        			callback(null, result);
+        		} else {
+        			callback(true, null);
+        		}
+        	}
+        });
+    },
+    getCode: function (params, callback) {
+        new GetCode(params, function (err, result) {
         	if (err) {
         		callback(err);
         	} else {

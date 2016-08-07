@@ -131,6 +131,10 @@ module.exports = function (app) {
                 	method: 'GET',
                 	url: 'http://' + req.headers.host + API + 'get-codes/:codeType/:schoolId'
                 },
+                getCode: {
+                	method: 'GET',
+                	url: 'http://' + req.headers.host + API + 'get-code/:schoolId/:codeType/:codeName'
+                },
                 updateCode: {
                 	method: 'PUT',
                 	url: 'http://' + req.headers.host + API + 'update-code/:codeId'
@@ -519,12 +523,26 @@ module.exports = function (app) {
     app.get(API + 'get-codes/:codeType/:schoolId', function (req, res) {
         SchoolConfig.getCodes(req.params, function (err, result) {
             if (err) {
-                res.status(500).send({message: "Code not found."});
+                res.status(500).send(err);
             } else {
             	if (result && result.length > 0) {
             		res.status(200).send(result);
             	} else {
-            		res.status(200).send({message: "No records found."});
+            		res.status(200).send({message: "Code not found."});
+            	}
+            }
+        });
+    });
+    
+    app.get(API + 'get-code/:schoolId/:codeType/:codeName', function (req, res) {
+        SchoolConfig.getCode(req.params, function (err, result) {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+            	if (result) {
+            		res.status(200).send(result);
+            	} else {
+            		res.status(200).send({message: "Code not found."});
             	}
             }
         });
