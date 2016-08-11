@@ -53,7 +53,7 @@ module.exports = {
         		if (result) {
         			callback(null, result);
         		} else {
-        			callback(true, null);
+        			callback(null, []);
         		}
         	}
         });
@@ -82,7 +82,7 @@ module.exports = {
         		if (result) {
         			callback(null, result);
         		} else {
-        			callback(true, null);
+        			callback(null, []);
         		}
         	}
         });
@@ -95,7 +95,7 @@ module.exports = {
         		if (result) {
         			callback(null, result);
         		} else {
-        			callback(true, null);
+        			callback(null, []);
         		}
         	}
         });
@@ -124,7 +124,7 @@ module.exports = {
         		if (result) {
         			callback(null, result);
         		} else {
-        			callback(true, null);
+        			callback(null, []);
         		}
         	}
         });
@@ -137,7 +137,7 @@ module.exports = {
         		if (result) {
         			callback(null, result);
         		} else {
-        			callback(true, null);
+        			callback(null, []);
         		}
         	}
         });
@@ -165,7 +165,7 @@ module.exports = {
         		if (result) {
         			callback(null, result);
         		} else {
-        			callback(true, null);
+        			callback(null, []);
         		}
         	}
         });
@@ -178,7 +178,7 @@ module.exports = {
         		if (result) {
         			callback(null, result);
         		} else {
-        			callback(true, null);
+        			callback(null, []);
         		}
         	}
         });
@@ -206,7 +206,7 @@ module.exports = {
         		if (result) {
         			callback(null, result);
         		} else {
-        			callback(true, null);
+        			callback(null, []);
         		}
         	}
         });
@@ -219,7 +219,7 @@ module.exports = {
         		if (result) {
         			callback(null, result);
         		} else {
-        			callback(true, null);
+        			callback(null, []);
         		}
         	}
         });
@@ -248,7 +248,7 @@ module.exports = {
         		if (result) {
         			callback(null, result);
         		} else {
-        			callback(true, null);
+        			callback(null, []);
         		}
         	}
         });
@@ -261,7 +261,7 @@ module.exports = {
         		if (result) {
         			callback(null, result);
         		} else {
-        			callback(true, null);
+        			callback(null, []);
         		}
         	}
         });
@@ -290,7 +290,7 @@ module.exports = {
         		if (result) {
         			callback(null, result);
         		} else {
-        			callback(true, null);
+        			callback(null, []);
         		}
         	}
         });
@@ -303,7 +303,7 @@ module.exports = {
         		if (result) {
         			callback(null, result);
         		} else {
-        			callback(true, null);
+        			callback(null, []);
         		}
         	}
         });

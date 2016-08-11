@@ -177,7 +177,7 @@ module.exports = function (app) {
             if (err) {
                 res.status(500).send({message: "School Profile not found."});
             } else {
-                res.status(200).send(result);
+            	res.status(200).send(result);
             }
         });
     });
@@ -233,11 +233,7 @@ module.exports = function (app) {
             if (err) {
                 res.status(500).send({message: "School Year not found."});
             } else {
-            	if (result && result.length > 0) {
-            		res.status(200).send(result);
-            	} else {
-            		res.status(200).send([]);
-            	}
+            	res.status(200).send(result);
             }
         });
     });
@@ -293,11 +289,7 @@ module.exports = function (app) {
             if (err) {
                 res.status(500).send({message: "School Sem not found."});
             } else {
-            	if (result && result.length > 0) {
-            		res.status(200).send(result);
-            	} else {
-            		res.status(200).send({message: "No records found."});
-            	}
+            	res.status(200).send(result);
             }
         });
     });
@@ -353,11 +345,7 @@ module.exports = function (app) {
             if (err) {
                 res.status(500).send({message: "Education Level not found."});
             } else {
-            	if (result && result.length > 0) {
-            		res.status(200).send(result);
-            	} else {
-            		res.status(200).send({message: "No records found."});
-            	}
+            	res.status(200).send(result);
             }
         });
     });
@@ -413,11 +401,7 @@ module.exports = function (app) {
             if (err) {
                 res.status(500).send({message: "Department not found."});
             } else {
-            	if (result && result.length > 0) {
-            		res.status(200).send(result);
-            	} else {
-            		res.status(200).send([]);
-            	}
+            	res.status(200).send(result);
             }
         });
     });
@@ -474,11 +458,7 @@ module.exports = function (app) {
             if (err) {
                 res.status(500).send({message: "Theme not found."});
             } else {
-            	if (result && result.length > 0) {
-            		res.status(200).send(result);
-            	} else {
-            		res.status(200).send({message: "No records found."});
-            	}
+            	res.status(200).send(result);
             }
         });
     });
@@ -525,11 +505,7 @@ module.exports = function (app) {
             if (err) {
                 res.status(500).send(err);
             } else {
-            	if (result && result.length > 0) {
-            		res.status(200).send(result);
-            	} else {
-            		res.status(200).send([]);
-            	}
+            	res.status(200).send(result);
             }
         });
     });
@@ -539,11 +515,7 @@ module.exports = function (app) {
             if (err) {
                 res.status(500).send(err);
             } else {
-            	if (result) {
-            		res.status(200).send(result);
-            	} else {
-            		res.status(200).send([]);
-            	}
+            	res.status(200).send(result);
             }
         });
     });
