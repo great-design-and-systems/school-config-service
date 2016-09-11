@@ -1,5 +1,6 @@
 'use strict';
 var SchoolProfile = require('../entity/school-profile');
+var DeleteSchoolYearBySchoolId = require('./delete-school-year-by-school-id');
 var logger = require('./get-logger');
 
 function execute(schoolId, callback) {
@@ -12,7 +13,7 @@ function execute(schoolId, callback) {
                 message: 'Failed deleting schoolId ' + schoolId
             });
         } else {
-            callback(null, result);
+        	new DeleteSchoolYearBySchoolId(schoolId, callback);
         }
     });
 }
